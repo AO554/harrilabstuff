@@ -6,7 +6,7 @@
 # ██   ██ ██   ██ ██   ██ ██   ██ ██     ██ ███ ██ ██    ██  ███        ██   ██ ██      ██   ██ ██      
 # ██   ██ ██   ██ ██   ██ ██   ██ ██      ███ ███   ██████  ███████     ██   ██ ███████ ██   ██ ███████ 
                                                                                                       
-# Quick Run Script
+# Quick Run Script -- Debian Linux
 # Last Updated [03-03-2024]
 # Designed to be curled and other scripts can be run from it from the repo
 
@@ -26,8 +26,6 @@ fi
 # Install git and dialog using OS package manager (Debian based and RHEL Based only)
 if [ "$OS" = "Debian GNU/Linux" ] || [ "$OS" = "Ubuntu" ]; then
     apt update && apt install -y git dialog
-elif [ "$OS" = "CentOS Linux" ] || [ "$OS" = "AlmaLinux" ] || ["$OS" = "Rocky Linux"]; then
-    yum install -y git dialog
 else
     echo "OS not supported"
     exit 1 
@@ -48,8 +46,6 @@ cd /opt/harrilabstuff
 # Using OS Check, cd to the correct directory
 if [ "$OS" = "Debian GNU/Linux" ] || [ "$OS" = "Ubuntu" ]; then
     cd Debian
-elif [ "$OS" = "CentOS Linux" ] || [ "$OS" = "AlmaLinux" ] || ["$OS" = "Rocky Linux"]; then
-    cd RHEL
 else
     echo "OS not supported"
     exit 1
