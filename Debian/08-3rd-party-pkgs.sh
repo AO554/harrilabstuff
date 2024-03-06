@@ -19,7 +19,7 @@ fi
 apt update
 
 # Collect list of available scripts for dialog into an array
-scripts=(*.sh)
+scripts=(/opt/harrilabstuff/3rd-party/*.sh)
 
 # Create a menu items array
 menu_items=()
