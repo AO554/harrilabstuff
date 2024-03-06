@@ -15,9 +15,6 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-# Update Repositories
-apt update
-
 # Collect list of available scripts for dialog into an array
 scripts=(/opt/harrilabstuff/3rd-party/*.sh)
 
@@ -31,8 +28,6 @@ done
 # Run dialog to give options to run other scripts
 dialog --title "Select a script to run" \
 --menu "Choose one of the following options:" 15 40 4 \
---ok-label "Run" \
---cancel-label "Back" \
 "${menu_items[@]}" 2> /tmp/selection
 
 # Check the exit status of dialog
@@ -46,7 +41,7 @@ fi
 
 # return to the previous dialog after the script has finished
 if [ $? -eq 0 ]; then
-    bash /opt/harrilabstuff/Debian/07-3rd-party-pkgs.sh
+    bash /opt/harrilabstuff/Debian/08-3rd-party-pkgs.sh
 fi
 
 # Clean up
