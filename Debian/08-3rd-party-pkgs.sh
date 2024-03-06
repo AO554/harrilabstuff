@@ -24,12 +24,15 @@ scripts=(/opt/harrilabstuff/3rd-party/*.sh)
 # Create a menu items array
 menu_items=()
 for i in "${!scripts[@]}"; do
-  menu_items+=("$i" "${scripts[$i]}")
+  filename=$(basename "${scripts[$i]}")
+  menu_items+=("$i" "$filename")
 done
 
 # Run dialog to give options to run other scripts
 dialog --title "Select a script to run" \
 --menu "Choose one of the following options:" 15 40 4 \
+--ok-label "Run" \
+--cancel-label "Back" \
 "${menu_items[@]}" 2> /tmp/selection
 
 # Check the exit status of dialog
@@ -38,7 +41,6 @@ if [ $? -eq 0 ]; then
     bash "${scripts[$(cat /tmp/selection)]}"
 else
     # Exit the script if cancel was pressed
-    echo "Scripts are located at /opt/harrilabstuff"
     exit 0
 fi
 

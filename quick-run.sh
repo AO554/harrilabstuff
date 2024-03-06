@@ -63,6 +63,8 @@ done
 # Run dialog to give options to run other scripts
 dialog --title "Select a script to run" \
 --menu "Choose one of the following options:" 15 40 4 \
+--ok-label "Run" \
+--cancel-label "Exit" \
 "${menu_items[@]}" 2> /tmp/selection
 
 # Check the exit status of dialog
