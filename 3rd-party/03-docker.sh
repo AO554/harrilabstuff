@@ -6,53 +6,36 @@
 # ██   ██ ██   ██ ██   ██ ██   ██ ██     ██ ███ ██ ██    ██  ███        ██   ██ ██      ██   ██ ██      
 # ██   ██ ██   ██ ██   ██ ██   ██ ██      ███ ███   ██████  ███████     ██   ██ ███████ ██   ██ ███████ 
                                                                                                       
-# Debian swapfile installation
-# Last Updated [03-03-2024]
+# Docker Deploy
+# Last Updated [20-03-2024]
 
-# Check if the script is running as root
+# Check if running as root
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
   exit
 fi
 
-# Check if `dialog` is installed
-if ! [ -x "$(command -v dialog)" ]; then
-  echo 'dialog is not installed. Installing...' >&2
-  apt-get install -y dialog
-fi
+# Update Repositories
+apt update
 
-# Dialog for swapfile size (2, 4, 8, 16, 32, 64, 128)
-dialog --title "Swapfile Size" --menu "Choose the size of the swapfile" 10 40 7 \
-2G "2GB" \
-4G "4GB" \
-8G "8GB" \
-16G "16GB" \
-32G "32GB" \
-64G "64GB" \
-128G "128GB" 2> /tmp/swapfile_size
+# Base Packages
+apt install ca-certificates curl -y
 
-# Check the exit status of dialog
-if [ $? -eq 0 ]; then
-    # Get the swapfile size from the dialog
-    SWAPFILE_SIZE=$(cat /tmp/swapfile_size)
+# GPG Keyring
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-    # Create the swapfile
-    fallocate -l $SWAPFILE_SIZE /swapfile
+# Add Version based Repository
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+apt update
 
-    # Set the correct permissions
-    chmod 600 /swapfile
+# Install Docker
+apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
-    # Set up a Linux swap area
-    mkswap /swapfile
-
-    # Enable the swapfile
-    swapon /swapfile
-
-    # Add the swapfile to the /etc/fstab file
-    echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
-else
-    # Exit the script if cancel was pressed
-    echo "Cancel pressed, exiting."
-    exit 0
-fi
-
+# Done
+echo "Docker Deployed"
+exit 0
