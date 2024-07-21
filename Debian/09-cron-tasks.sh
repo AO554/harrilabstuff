@@ -16,7 +16,7 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # Collect list of available tasks for dialog into an array
-scripts=(/opt/harrilabstuff/crontasks/*.sh)
+tasks=(/opt/harrilabstuff/crontasks/*.sh)
 
 # Create a menu items array
 menu_items=()

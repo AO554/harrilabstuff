@@ -25,7 +25,7 @@ fi
 
 # Install git and dialog using OS package manager (Debian based and RHEL Based only)
 if [ "$OS" = "Debian GNU/Linux" ] || [ "$OS" = "Ubuntu" ]; then
-    apt update && apt install -y git dialog
+    apt update && apt install -y sudo curl git dialog
 else
     echo "OS not supported"
     exit 1 
