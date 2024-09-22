@@ -28,9 +28,6 @@ sudo locale-gen en_US.UTF-8
 # Update and upgrade
 apt update && apt upgrade -y
 
-# Install locales-all first
-apt install -y locales-all
-
 # Set default locale to $LANG
 echo "locales locales/default_environment_locale select $LANG" | sudo debconf-set-selections
 echo "locales locales/locales_to_be_generated multiselect $LANG UTF-8" | sudo debconf-set-selections
@@ -65,8 +62,13 @@ apt install -y \
     p7zip-full \
     bzip2 \
     ncdu \
-    dialog\
-    ruby
+    dialog \
+    ruby \ 
+    lsof \
+    auditd \
+    apt-transport-https \
+    ca-certificates \
+
 
 # Clean up
 apt autoremove -y
