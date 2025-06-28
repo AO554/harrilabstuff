@@ -41,7 +41,7 @@ fi
 
 # return to the previous dialog after the script has finished
 if [ $? -eq 0 ]; then
-    bash /opt/harrilabstuff/Debian/08-3rd-party-pkgs.sh
+    bash /opt/harrilabstuff/Debian/09-cron-tasks.sh
 fi
 
 # Clean up
