@@ -33,43 +33,40 @@ echo "locales locales/default_environment_locale select $LANG" | sudo debconf-se
 echo "locales locales/locales_to_be_generated multiselect $LANG UTF-8" | sudo debconf-set-selections
 sudo dpkg-reconfigure --frontend=noninteractive locales
 
+
 # Install base packages
-apt install -y \
-    sudo \
-    curl \
-    wget \
-    nload \
-    vnstat \
-    net-tools \
-    dnsutils \
-    build-essential \
-    fail2ban \
-    gnupg \
-    iptables \
-    python3 \
-    python3-pip \
-    axel \
-    bpytop \
-    git \
-    zsh \
-    fastfetch \
-    htop \
-    tmux \
-    tmate \
-    nano \
-    unzip \
-    zip \
-    p7zip-full \
-    bzip2 \
-    ncdu \
-    dialog \
-    ruby \ 
+PACKAGES=(
+    sudo
+    curl
+    wget
+    nload
+    vnstat
+    net-tools
+    bind9-dnsutils
+    build-essential
+    fail2ban
+    gnupg
+    iptables
+    python3
+    python3-pip
+    axel
+    bpytop
+    git
+    zsh
+    fastfetch
+    htop
+    tmux
+    tmate
+    nano
+    unzip
+    zip
+    p7zip-full
+    bzip2
+    ncdu
+    ruby
+)
 
-apt install -y \
-    auditd \
-    apt-transport-https \
-    ca-certificates \
-
+apt install -y "${PACKAGES[@]}"
 
 # Clean up
 apt autoremove -y
