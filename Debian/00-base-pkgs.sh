@@ -64,7 +64,8 @@ apt install -y \
     ncdu \
     dialog \
     ruby \ 
-    lsof \
+
+apt install -y \
     auditd \
     apt-transport-https \
     ca-certificates \
