@@ -7,7 +7,7 @@
 # ██   ██ ██   ██ ██   ██ ██   ██ ██      ███ ███   ██████  ███████     ██   ██ ███████ ██   ██ ███████ 
                                                                                                       
 # Quick Run Script -- Debian Linux
-# Last Updated [03-03-2024]
+# Last Updated [04-09-2025]
 # Designed to be curled and other scripts can be run from it from the repo
 
 # Check if the script is running as root
@@ -25,7 +25,7 @@ fi
 
 # Install git and dialog using OS package manager (Debian based and RHEL Based only)
 if [ "$OS" = "Debian GNU/Linux" ] || [ "$OS" = "Ubuntu" ]; then
-    apt update && apt install -y sudo curl git dialog locales-all
+    apt update && apt install -y sudo curl git dialog locales-all lsof
 else
     echo "OS not supported"
     exit 1 

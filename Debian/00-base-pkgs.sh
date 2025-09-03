@@ -7,7 +7,7 @@
 # ██   ██ ██   ██ ██   ██ ██   ██ ██      ███ ███   ██████  ███████     ██   ██ ███████ ██   ██ ███████ 
                                                                                                       
 # Debian Base Packages
-# Last Updated [03-03-2024]
+# Last Updated [04-09-2025]
 
 # Check if the script is running as root
 if [ "$EUID" -ne 0 ]
@@ -52,7 +52,7 @@ apt install -y \
     bpytop \
     git \
     zsh \
-    neofetch \
+    fastfetch \
     htop \
     tmux \
     tmate \
